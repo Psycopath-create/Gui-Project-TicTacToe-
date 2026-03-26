@@ -4,6 +4,10 @@
 #include <string>
 #include <vector>
 
+namespace sf {
+class RenderWindow;
+}
+
 // This is the "Blueprint" for each player
 struct Player {
     std::string name;
@@ -28,10 +32,19 @@ struct GameState {
 
 // Shared board state used by drawing, input, and game logic.
 extern char board[3][3];
+extern char currentPlayer;
+extern bool gameOver;
+extern char winner;
+extern bool draw;
+extern int hoverRow;
+extern int hoverCol;
 
-void drawGrid();
+void drawGrid(sf::RenderWindow& window);
 void resetBoard();
-bool placeMark(int row, int col, char player);
+bool placeMark(int row, int col);
+void processEvents(sf::RenderWindow& window);
+void updateWindowTitle(sf::RenderWindow& window);
+bool mapPixelToCell(const sf::RenderWindow& window, int px, int py, int& row, int& col);
 
 char checkWinner();
 bool isBoardFull();
