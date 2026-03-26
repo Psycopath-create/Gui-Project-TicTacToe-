@@ -26,4 +26,17 @@ struct GameState {
     std::vector<Move> history; // For the Replay requirement
 };
 
+// Shared board state used by drawing, input, and game logic.
+extern char board[3][3];
+
+void drawGrid();
+void resetBoard();
+bool placeMark(int row, int col, char player);
+
+char checkWinner();
+bool isBoardFull();
+
+void saveStats(const Player& p);
+void loadStats(Player& p);
+
 #endif
